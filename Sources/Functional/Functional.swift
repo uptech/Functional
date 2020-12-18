@@ -145,10 +145,18 @@ public func curry<A, B, C>(_ f: @escaping (A, B) -> C) -> (A) -> (B) -> C {
     return { a in { b in f(a, b) } }
 }
 
+public func curry<A, B, C, D>(_ f: @escaping (A, B, C) -> D) -> (A) -> (B) -> (C) -> D {
+    return { a in { b in { c in f(a, b, c) } } }
+}
+
 // Flip
 
 public func flip<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (B) -> (A) -> C {
     return { b in { a in f(a)(b) }}
+}
+
+public func flip<A, B, C, D>(_ f: @escaping (A) -> (B) -> (C) -> D) -> (C) -> (B) -> (A) -> D {
+    return { c in { b in { a in f(a)(b)(c) } } }
 }
 
 // Zurry
