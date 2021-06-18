@@ -176,3 +176,22 @@ public func map<A, B>(_ f: @escaping (A) -> B) -> ([A]) -> ([B]) {
 public func filter<A>(_ p: @escaping (A) -> Bool) -> ([A]) -> [A] {
     return { $0.filter(p) }
 }
+
+
+// Logical Function Composition
+
+public func && <A>(
+    f: @escaping (A) -> Bool,
+    g: @escaping (A) -> Bool) -> ((A) -> Bool) {
+    return { a in
+        return f(a) && g(a)
+    }
+}
+
+public func || <A>(
+    f: @escaping (A) -> Bool,
+    g: @escaping (A) -> Bool) -> ((A) -> Bool) {
+    return { a in
+        return f(a) || g(a)
+    }
+}
